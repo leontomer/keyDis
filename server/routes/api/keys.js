@@ -8,6 +8,8 @@ const key = new NodeRSA({ b: 1024 });
 var public_key = key.exportKey("public");
 var private_key = key.exportKey("private");
 router.get("/getkey", async (req, res) => {
+  console.log("entered");
+
   try {
     res.json({ key: public_key });
   } catch (err) {
@@ -17,11 +19,11 @@ router.get("/getkey", async (req, res) => {
 });
 
 router.post("/decrypt", async (req, res) => {
-  console.log("ebntred");
+  console.log("entered2");
   try {
     const { textToDecrypt } = req.body;
     console.log(textToDecrypt);
-    let key_private = new NodeRSA(private_key);
+    const key_private = new NodeRSA(private_key);
     console.log(
       "decrypted message: " + key_private.decrypt(textToDecrypt, "utf8")
     );
